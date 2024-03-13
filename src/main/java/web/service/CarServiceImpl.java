@@ -1,11 +1,22 @@
 package web.service;
-
+import org.springframework.stereotype.Service;
 import web.model.Car;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Service
 public class CarServiceImpl implements CarService {
+    @Override
+    public List<Car> getCarsByCount(int count) {
+        List<Car> allCars = createCarList();
+        if (count < allCars.size()) {
+            return allCars.subList(0, Math.min(count, allCars.size()));
+        } else {
+            return allCars;
+        }
+    }
     public List<Car> createCarList() {
         List<Car> cars = new ArrayList<>();
 
